@@ -9,5 +9,3 @@
 		# in both loops, if a match is found, cut those two characters out of the string and reform as a new string
 			# if this happens decrement strlen by 2
   # return strlen after the loops have finished
-
-# trying to make a PR
