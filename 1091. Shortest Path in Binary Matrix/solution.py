@@ -9,7 +9,7 @@ class Solution(object):
 	 	# 2. all adjacent cells are different and share an edge or corner
 
 
-	def findAdjacent(matrix, start_row, start_col):
+	def findAdjacent(grid: List[List[int]], start_row: Tuple[int, int], start_col: Tuple[int, int]) -> List[Tuple[int, int]]:
 		# create method to find surrounding cells that are clear path, given a  
 		# matrix and a current location
 
@@ -22,20 +22,25 @@ class Solution(object):
 			# return a list of the surrounding 0's
 
 
-	def shortestPathBinaryMatrix(self, grid):
+	def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
 		# initalize queue for BFS to keep track of which cells are waiting to be 
-		# processed initialize step counter variable
+		# processed as queue = [(0,0)]. tuples represent the difference between the
+		# matrix location and the upper leftmost cell.
+		# initialize step counter variable
 
 		# while queue is not empty
-			# iterate through nodes in the queue
+			
+			# set numCellsThisRound to length of queue
+			# iterate through i in range(numCellsThisRound)
 
-			# for each node, if the node is the bottom right most cell, return  
-			# the current step size because we have found the shortest path
-
-			# else use above method to find surrounding 0's, add those to the
-			# queue 
-
-			# remove the first node from the queue
+				# set current node = pop the top cell off the queue
+				# for each node, if the node is the bottom right most cell, return  
+				# the current step size because we have found the shortest path
+	
+				# else use above method to find surrounding 0's, add those to the
+				# queue 
+	
+				
 
 			# step = step + 1
 
