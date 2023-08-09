@@ -1,6 +1,5 @@
 class Solution:
-
-	# given a 0-indexed int array, find the maximum length alternating subarray
+    # given a 0-indexed int array, find the maximum length alternating subarray
 	# where:
 	
 	# 1. alternating means the subarray goes [x, x+1, x, x+1...] for the 
@@ -11,39 +10,81 @@ class Solution:
 
     	# declare a subArraySize variable that keeps track of length of 
     	# alternating subarrays.
+        subArraySize = 0
 
-    	# declare a list to hold potential subArraySizes.
-
+    	# variable to hold the largest size
+        largestSize = 0
+		# variable to keep track of index in found subarray
+        subArrayIndex = 0
+        
+        # boolean to determine if found sub array in while loop iteration
+        foundSubArray = False
+        
     	# loop through the array starting from 0, increment index by 1 
     	# each time. this loop is the outer loop.
+        i = 0
+        while i < len(nums) - 1:
 
     		# if the int at next index is one greater than int at the 
     		# current index:
-
-    			# set subArraySize = 2 since we have an alternating subarray 
-    			# pair.
-
-    			# create a new variable subArrayIndex and set that equal to the 
-    			# current outer loop index + 1.
-
+            if nums[i] + 1 == nums[i+1]:
+                
+                # set the sub array size to 2 since we have 2 elements
+                subArraySize = 2
+                
+                # set subArrayIndex to keep track of where we are in sub array,
+                # add 2 since we're moving forward past the two elements we know
+                subArrayIndex = i + 2
+      
     			# check for continuation of the subarray via:
+                while subArrayIndex < len(nums):
+                    # if we're at an odd counter, check if current int is one 
+                    # less than previous
+                    if subArraySize % 2 != 0 and \
+                    nums[subArrayIndex] == nums[subArrayIndex - 1] + 1:
+                        # increment subArraySize and subArrayIndex and continue
+                        subArraySize = subArraySize + 1
+                        subArrayIndex = subArrayIndex + 1
+                        foundSubArray = True
+                        continue
+                    
+                    # if we're at an odd counter, check if current int is one 
+                    # more than previous
+                    if subArraySize % 2 == 0 and \
+                    nums[subArrayIndex] == nums[subArrayIndex - 1] - 1:
+                        # increment subArraySize and subArrayIndex and continue
+                        subArraySize = subArraySize + 1
+                        subArrayIndex = subArrayIndex + 1
+                        foundSubArray = True
+                        continue
+                        
+                    # else break out of while loop
+                    else:
+                        foundSubArray = False
+                        break
 
-    			# while current value (at subArrayIndex) - 1 = next value and 
-    			# current value = next next value and subArrayIndex 
-    			# (the current index) is less than length of nums - 2:
-
-    				# increment subArraySize by 2
-    				# increment subArrayIndex by 2
+                                        
+    			# reached end of sub array. record subArraySize if it's larger
+                # than the previous largest size
+                if subArraySize > largestSize:
+                    largestSize = subArraySize
     			
-    			# reached end of sub array. append subArraySize to the list of 
-    			# subArraySizes.
-    			
-    			# add subArraySize - 1 to outer loop index so we skip the 
-    			# subarray that we just went through, restarting outer loop 
-    			# at the last element of the subarray.
+            # if we found a sub array:
+            # add subArraySize to outer loop index so we skip the 
+            # subarray that we just went through, restarting outer loop 
+            # at the last element of the subarray.
+            # else: add 1 to outer loop index
+            if foundSubArray:
+                i = i + subArraySize
+            else:
+                i = i + 1
 
-    			# reset subArraySize to 0.
+            # reset subArraySize and subArrayIndex to 0.
+            subArraySize = 0
+            subArrayIndex = 0
 
-
-    	# now that we have all possible subArraySizes, find biggest in the list 
-    	# and return it.
+    	# return largest sub array size if it is nonzero, else return -1
+        if largestSize > 0:
+            return largestSize
+        else:
+            return -1
