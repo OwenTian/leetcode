@@ -48,7 +48,7 @@ class Solution:
                         foundSubArray = True
                         continue
                     
-                    # if we're at an odd counter, check if current int is one 
+                    # if we're at an even counter, check if current int is one 
                     # more than previous
                     if subArraySize % 2 == 0 and \
                     nums[subArrayIndex] == nums[subArrayIndex - 1] - 1:
