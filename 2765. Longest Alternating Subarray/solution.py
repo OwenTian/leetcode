@@ -5,7 +5,7 @@ class Solution:
 	# 1. alternating means the subarray goes [x, x+1, x, x+1...] for the 
 	# entire subarray
 	# 2. the array is between 2 and 100 in length
-	# 3. ints in the array are equal to or between 1 and 10^4
+	# 3. ints in the array are equal to or between 1 and 10^4 
     def alternatingSubarray(self, nums: List[int]) -> int:
 
     	# declare a subArraySize variable that keeps track of length of 
